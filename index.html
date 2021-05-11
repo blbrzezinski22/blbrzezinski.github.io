@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <meta name="google-signin-client_id" content="393043646934-1chbu7nbv7he58fc44o73363i4a25a51.apps.googleusercontent.com">
+
+    <script src="/functions.js"></script><script>
+        let x
+        
+            function geturl(){
+                $.ajax({
+        
+                    url : 'http://10.1.4.168:8000/url',
+                    type : 'get',
+                    dataType:'json',
+                    async: false,
+                success : function(data) {              
+                   alert('Data: '+JSON.stringify(data));
+                },
+                error : function(request,error){
+                    alert("Request: "+JSON.stringify(error));
+                }
+                });}
+        
+        
+                function getassign(){
+                $.ajax({
+        
+                    url : 'http://10.1.4.168:8000',
+                    type : 'get',
+                    dataType:'json',
+                    async: false,
+                success : function(data) {              
+                   alert('Data: '+JSON.stringify(data));
+                   document.getElementById(ass).innerHTML = data;
+                },
+                error : function(request,error){
+                    alert("Request: "+JSON.stringify(error));
+                }
+                });}
+                
+            
+        
+        
+        function printText(){
+            var x = document.getElementById('input').value;
+            $.ajax({ 
+                    url: 'http://10.1.4.168:8000/post-test',
+                    type: "POST",
+                dataType: "json",
+                data: x,
+                success: () => {
+                    alert('sent');
+                  },
+                error: ()=> {
+                    alert('post failed')
+                }
+        
+        })
+
+            alert(userInput)}
+
+        </script>
+</head>
+<body onload= 'geturl()'>
+
+       <form>
+           <input id = "input" type="text" name="textie" onchange="printText()" >
+           </form>
+
+           <input id = "url" type="button" value="get URL to sign in" name="get assignments" onclick="geturl()" >
+           <input id = "assign" type="button" value="get assignment" name="get assignments" onclick="getassign()" >
+           <div class="g-signin2" data-onsuccess="onSignIn"></div>
+</body>
+</html>
